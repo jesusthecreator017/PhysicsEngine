@@ -1,4 +1,5 @@
 #include <vector>
+
 #include "raylib.h"
 #include "objects.hpp"
 
@@ -14,7 +15,7 @@ int main() {
     SetTargetFPS(60);
 
     // Set the random generator
-    SetRandomSeed((uint16_t)time(NULL));
+    SetRandomSeed((u_int16_t)time(0));
 
     // Generate Objects
     std::vector<Object> obj_arr;

@@ -8,7 +8,7 @@ Object::Object(){
     GenerateRandomObject();
 }
 
-Object::Object(Vector2 pos, Vector2 vel, Vector2 accel, uint8_t m, float res, uint16_t id, uint8_t w, uint8_t h, Color col){
+Object::Object(Vector2 pos, Vector2 vel, Vector2 accel, u_int8_t m, float res, u_int16_t id, u_int8_t w, u_int8_t h, Color col){
     position = pos;
     velocity = vel;
     acceleration = accel;
@@ -30,17 +30,17 @@ void Object::GenerateRandomObject(){
     velocity = (Vector2){static_cast<float>(GetRandomValue(0, 1)), static_cast<float>(GetRandomValue(0, 1))};
     acceleration = (Vector2){0, 0};
     
-    mass = static_cast<uint8_t>(GetRandomValue(0, 255));
+    mass = static_cast<u_int8_t>(GetRandomValue(0, 255));
     width = GetRandomValue(200, 700);
     height = GetRandomValue(200, 350);
 
     restitution = 0 + (float)GetRandomValue(0, 10000) / 10000.0f * (1 - 0);
     iD = GetRandomValue(0, 65536);
     
-    color = (Color){static_cast<uint8_t>(GetRandomValue(0, 255)), static_cast<uint8_t>(GetRandomValue(0, 255)), static_cast<uint8_t>(GetRandomValue(0, 255)), 255};
+    color = (Color){static_cast<u_int8_t>(GetRandomValue(0, 255)), static_cast<u_int8_t>(GetRandomValue(0, 255)), static_cast<u_int8_t>(GetRandomValue(0, 255)), 255};
 }
 
-void Object::Print(uint16_t x_offset=0, uint16_t y_offset=0){
+void Object::Print(u_int16_t x_offset=0, u_int16_t y_offset=0){
    /* Purpose: To display the information on a specific object*/
    DrawRectangle(5 + x_offset, 5 + y_offset, 250, 160, (Color){90, 70, 90, 155});
    DrawText(TextFormat("Position: (%0.2f, %0.2f)\nVelocity: (%0.2f, %0.2f)\nAcceleration: (%0.2f, %0.2f)\nMass: %i\nRestitution: %0.4f\nID: %i\nWidth: %i\nHeight: %i\nColor: (%i, %i, %i, %i)\nCollision: %s", position.x, position.y, velocity.x, velocity.y, acceleration.x, acceleration.y, mass, restitution, iD, width, height, color.r, color.g, color.b, color.a, colliding ? "True" : "False"), 10 + x_offset, 10 + y_offset, 18, (Color){255, 255, 255, 255});

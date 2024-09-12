@@ -17,7 +17,7 @@ bool AABBvsAABB(AABB a, AABB b);
 class Object{
 private:  
     AABB aabb;
-    u_int8_t mass; // Max: 255
+    uint8_t mass; // Max: 255
     float restitution; // EX: 65536
 
 public:
@@ -25,15 +25,14 @@ public:
     Vector2 velocity; // EX: (1, -1)
     Vector2 acceleration; // EX: (.013, 0.1234)
 
-    u_int16_t iD; // EX: 65536 
+    uint16_t iD; // EX: 65536 
 
-    u_int16_t width; // Max: 255
-    u_int16_t height; // Max: 255
+    uint16_t width; // EX: 65536 
+    uint16_t height; // EX: 65536 
 
     Color color; // EX: (255, 255, 255, 255) Full White
 
     bool isDragging = false;
-    bool colliding = false;
 
     // Constructor
     Object();
@@ -41,7 +40,7 @@ public:
 
     // Class Functions
     void GenerateRandomObject();
-    void Print(u_int16_t x_offset, u_int16_t y_offset);
+    void Print(uint16_t x_offset, uint16_t y_offset);
     void Draw();
 
     bool CheckCollisionWithMouse();

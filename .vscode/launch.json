@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Debug with Raylib",         // Descriptive name for the debug configuration
+            "type": "cppdbg",                        // Debug type for C++ with gdb
+            "request": "launch",                     // Specifies to launch and debug the program
+            "program": "${workspaceFolder}/bin/main",    // Path to the compiled binary
+            "args": [],                              // Command-line arguments (if any) can be passed here
+            "stopAtEntry": false,                    // Change to true if you want to break at the start
+            "cwd": "${workspaceFolder}",             // Working directory of the program
+            "environment": [],
+            "externalConsole": false,                // If true, opens the program in an external terminal
+            "MIMode": "gdb",                         // Use gdb as the debugger
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",                // Ensure the build task is executed before debugging
+            "miDebuggerPath": "/usr/bin/gdb",        // Adjust this path for gdb (use 'which gdb' to find it)
+            "miDebuggerArgs": "",                    // Additional arguments for gdb, if any
+            "logging": {
+                "trace": true,                       // Enable tracing of debugger requests
+                "traceResponse": true,               // Enable tracing of responses from the debugger
+                "engineLogging": false
+            },
+            "internalConsoleOptions": "openOnSessionStart", // Show debug console when session starts
+            "linux": {
+                "MIMode": "gdb"
+            },
+            "osx": {
+                "MIMode": "lldb",                    // macOS uses LLDB by default, but gdb can also be used
+                "miDebuggerPath": "/usr/local/bin/gdb"  // Adjust this if you're using gdb instead of lldb
+            }
+        }
+    ]
+}

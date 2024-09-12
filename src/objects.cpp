@@ -26,7 +26,6 @@ void Object::GenerateRandomObject(){
        Parameters: None */
     aabb = (AABB){(Vector2){position.x - width/2, position.y - height/2}, (Vector2){position.x + width/2, position.y + height/2}};
 
-    position = (Vector2){static_cast<float>(GetRandomValue(0, 1200 - width)), static_cast<float>(GetRandomValue(0, 720 - height))};
     velocity = (Vector2){static_cast<float>(GetRandomValue(0, 1)), static_cast<float>(GetRandomValue(0, 1))};
     acceleration = (Vector2){0, 0};
     
@@ -34,6 +33,8 @@ void Object::GenerateRandomObject(){
     width = GetRandomValue(200, 700);
     height = GetRandomValue(200, 350);
 
+    position = (Vector2){static_cast<float>(GetRandomValue(0, 1200 - width)), static_cast<float>(GetRandomValue(0, 720 - height))};
+    
     restitution = 0 + (float)GetRandomValue(0, 10000) / 10000.0f * (1 - 0);
     iD = GetRandomValue(0, 65536);
     
@@ -43,7 +44,7 @@ void Object::GenerateRandomObject(){
 void Object::Print(u_int16_t x_offset=0, u_int16_t y_offset=0){
    /* Purpose: To display the information on a specific object*/
    DrawRectangle(5 + x_offset, 5 + y_offset, 250, 160, (Color){90, 70, 90, 155});
-   DrawText(TextFormat("Position: (%0.2f, %0.2f)\nVelocity: (%0.2f, %0.2f)\nAcceleration: (%0.2f, %0.2f)\nMass: %i\nRestitution: %0.4f\nID: %i\nWidth: %i\nHeight: %i\nColor: (%i, %i, %i, %i)\nCollision: %s", position.x, position.y, velocity.x, velocity.y, acceleration.x, acceleration.y, mass, restitution, iD, width, height, color.r, color.g, color.b, color.a, colliding ? "True" : "False"), 10 + x_offset, 10 + y_offset, 18, (Color){255, 255, 255, 255});
+   DrawText(TextFormat("Position: (%0.2f, %0.2f)\nVelocity: (%0.2f, %0.2f)\nAcceleration: (%0.2f, %0.2f)\nMass: %i\nRestitution: %0.4f\nID: %i\nWidth: %i\nHeight: %i\nColor: (%i, %i, %i, %i)", position.x, position.y, velocity.x, velocity.y, acceleration.x, acceleration.y, mass, restitution, iD, width, height, color.r, color.g, color.b, color.a), 10 + x_offset, 10 + y_offset, 18, (Color){255, 255, 255, 255});
 }
 
 void Object::Draw(){

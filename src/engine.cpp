@@ -12,6 +12,7 @@ void Engine::AddObjects(const std::shared_ptr<Object> &obj){
 void Engine::Update(){
     Vector2 mousePos = GetMousePosition();
 
+    // To click on an object
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         for(auto& obj : obj_arr){
             if(obj->CheckCollisionWithMouse()){
@@ -34,6 +35,20 @@ void Engine::Update(){
             selectedShared->position = (Vector2){mousePos.x - selectedShared->width / 2, mousePos.y - selectedShared->height / 2};
         }
     }
+    //-------------------------------------------------
+
+    //AABB Updates
+    //-------------------------------------------------
+    for(auto& obj : obj_arr){
+        obj->UpdateAABB();
+    }
+
+    if(AABBvsAABB(obj_arr[0]->aabb, obj_arr[1]->aabb)){
+        obj_arr[1]->color = (Color){255, 0, 0, 255}; // Colision Detected Red
+    } else {
+        obj_arr[1]->color = (Color){0, 255, 0, 255}; // No Collision Detected Green
+    }
+    //-------------------------------------------------
 }
 
 // Render all Objects

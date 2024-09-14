@@ -16,11 +16,11 @@ bool AABBvsAABB(AABB a, AABB b);
 //--------------------------------------------------
 class Object{
 private:  
-    AABB aabb;
     uint8_t mass; // Max: 255
     float restitution; // EX: 65536
 
 public:
+    AABB aabb;
     Vector2 position; // EX: (124, 245)
     Vector2 velocity; // EX: (1, -1)
     Vector2 acceleration; // EX: (.013, 0.1234)
@@ -42,8 +42,11 @@ public:
     void GenerateRandomObject();
     void Print(uint16_t x_offset, uint16_t y_offset);
     void Draw();
+    void UpdateAABB();
 
     bool CheckCollisionWithMouse();
+
+
 };
 //--------------------------------------------------
 

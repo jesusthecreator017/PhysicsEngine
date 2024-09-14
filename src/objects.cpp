@@ -24,7 +24,6 @@ Object::Object(Vector2 pos, Vector2 vel, Vector2 accel, u_int8_t m, float res, u
 void Object::GenerateRandomObject(){
     /* Purpose: Generate Random Values for an object
        Parameters: None */
-    aabb = (AABB){(Vector2){position.x - width/2, position.y - height/2}, (Vector2){position.x + width/2, position.y + height/2}};
 
     velocity = (Vector2){static_cast<float>(GetRandomValue(0, 1)), static_cast<float>(GetRandomValue(0, 1))};
     acceleration = (Vector2){0, 0};
@@ -33,22 +32,29 @@ void Object::GenerateRandomObject(){
     width = GetRandomValue(200, 700);
     height = GetRandomValue(200, 350);
 
-    position = (Vector2){static_cast<float>(GetRandomValue(0, 1200 - width)), static_cast<float>(GetRandomValue(0, 720 - height))};
+    position = (Vector2){static_cast<float>(GetRandomValue(0, 1200 - width/2)), static_cast<float>(GetRandomValue(0, 720 - height/2))};
     
     restitution = 0 + (float)GetRandomValue(0, 10000) / 10000.0f * (1 - 0);
     iD = GetRandomValue(0, 65536);
     
     color = (Color){static_cast<u_int8_t>(GetRandomValue(0, 255)), static_cast<u_int8_t>(GetRandomValue(0, 255)), static_cast<u_int8_t>(GetRandomValue(0, 255)), 255};
+    
+    UpdateAABB();
 }
 
 void Object::Print(u_int16_t x_offset=0, u_int16_t y_offset=0){
    /* Purpose: To display the information on a specific object*/
-   DrawRectangle(5 + x_offset, 5 + y_offset, 250, 160, (Color){90, 70, 90, 155});
-   DrawText(TextFormat("Position: (%0.2f, %0.2f)\nVelocity: (%0.2f, %0.2f)\nAcceleration: (%0.2f, %0.2f)\nMass: %i\nRestitution: %0.4f\nID: %i\nWidth: %i\nHeight: %i\nColor: (%i, %i, %i, %i)", position.x, position.y, velocity.x, velocity.y, acceleration.x, acceleration.y, mass, restitution, iD, width, height, color.r, color.g, color.b, color.a), 10 + x_offset, 10 + y_offset, 18, (Color){255, 255, 255, 255});
+   DrawRectangle(5 + x_offset, 5 + y_offset, 250, 175, (Color){90, 70, 90, 155});
+   DrawText(TextFormat("Position: (%0.2f, %0.2f)\nVelocity: (%0.2f, %0.2f)\nAcceleration: (%0.2f, %0.2f)\nMass: %i\nRestitution: %0.4f\nID: %i\nWidth: %i\nHeight: %i\nColor: (%i, %i, %i, %i)\nAABB: Min(%.2f, %.2f)\nAABB: Max(%.2f, %.2f)", position.x, position.y, velocity.x, velocity.y, acceleration.x, acceleration.y, mass, restitution, iD, width, height, color.r, color.g, color.b, color.a, aabb.min.x, aabb.min.y, aabb.max.x, aabb.max.y), 10 + x_offset, 10 + y_offset, 18, (Color){255, 255, 255, 255});
 }
 
 void Object::Draw(){
     DrawRectangle(position.x, position.y, width, height, color);
+}
+
+void Object::UpdateAABB(){
+    aabb.min = (Vector2){position.x, position.y};
+    aabb.max = (Vector2){position.x + width, position.y + height};
 }
 
 bool Object::CheckCollisionWithMouse(){
